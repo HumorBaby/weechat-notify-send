@@ -37,6 +37,8 @@ import time
 
 
 # Ensure that we are running under WeeChat.
+from datetime import datetime
+
 try:
     import weechat
 except ImportError:
@@ -559,7 +561,8 @@ def prepare_notification(buffer, nick, message):
     else:
         source = (weechat.buffer_get_string(buffer, 'short_name') or
                   weechat.buffer_get_string(buffer, 'name'))
-        message = nick + nick_separator() + message
+        # message = nick + nick_separator() + message
+        message = datetime.now().strftime('%c')
 
     max_length = int(weechat.config_get_plugin('max_length'))
     if max_length > 0:
